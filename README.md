@@ -18,6 +18,8 @@ cd /Users/wayne/Documents/work/code/crossshot
 bash tools/run-macos.sh
 ```
 
+**权限注意：开发进程截图已通过；正常双击独立启动目前缺少CrossShot自己的屏幕录制授权。系统权限申请已触发，请允许后完全退出/重新启动，再运行 `bash tools/probe-installed-macos.sh` 验证。**
+
 应用会显示一张自有测试图。选择 `ppocr-v4-mobile` 或 `ppocr-v5-mobile` 后点“本地识别”。点“贴图”验证浮窗；“截图主屏幕”进入冻结画面的选区。尚无全局快捷键/托盘/标注/富文本。
 
 ## 从源码复现（Mac ARM）

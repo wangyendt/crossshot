@@ -5,6 +5,7 @@ import json,hashlib,re,shutil,statistics,subprocess
 r=Path(__file__).resolve().parents[1];e=r/'evidence';e.mkdir(exist_ok=True)
 items={
  'mac-probe.json':'artifacts/latest/mac-probe.json',
+ 'launchservices-capture.json':'artifacts/launchservices-probe/mac-probe.json',
  'ui-smoke.json':'artifacts/latest/ui-smoke.json',
  'ocr-v4.json':'artifacts/latest/ocr-captured-v4.json',
  'ocr-v5.json':'artifacts/latest/ocr-captured-v5.json',
@@ -40,7 +41,8 @@ for f in ['artifacts/packaged-libraries.log','artifacts/packaged-ui.libraries']:
 subprocess.run(['codesign','--verify','--deep','--strict',str(r/'artifacts/package/CrossShot.app')],check=True)
 sourceFiles=sorted(p for d in ['apps','libs','platform','providers','tests'] for p in (r/d).rglob('*') if p.suffix in {'.cpp','.hpp','.mm','.py'})
 hashes={str(p.relative_to(r)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sourceFiles}
-summary={'date':'2026-11-02','scope':'Mac ARM current-display P0 slice, NOT full P0 completion','cpu':'Apple M1 Max','host':mac,'localOcr':bench,'fixtureGroundTruth':truth,'coreAssertions':14,'widgetBehaviorCases':4,'ctestSuitesPassed':2,'ocrCliCasesPassed':8,'gui':ui,'packaging':{'adHocSignatureVerified':True,'cleanEnvironmentGuiAndWorkerPassed':True,'loadedSdkPaths':False,'modelFilesBundled':False,'notarized':False,'testedOnAnotherMachine':False},'windowsRuntimeTested':False,'linuxRuntimeTested':False,'remoteOcrCalled':False,'fullDesktopSaved':False,'sourceSha256':hashes}
+independent=json.loads((e/'launchservices-capture.json').read_text())
+summary={'launchServicesCapture':independent,'date':'2026-11-02','scope':'Mac ARM current-display P0 slice, NOT full P0 completion','cpu':'Apple M1 Max','host':mac,'localOcr':bench,'fixtureGroundTruth':truth,'coreAssertions':14,'widgetBehaviorCases':4,'ctestSuitesPassed':2,'ocrCliCasesPassed':8,'gui':ui,'packaging':{'adHocSignatureVerified':True,'cleanEnvironmentGuiAndWorkerPassed':True,'loadedSdkPaths':False,'modelFilesBundled':False,'notarized':False,'testedOnAnotherMachine':False},'windowsRuntimeTested':False,'linuxRuntimeTested':False,'remoteOcrCalled':False,'fullDesktopSaved':False,'sourceSha256':hashes}
 (e/'summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n')
 rows=[]
 for b in bench: rows.append(f"| {b['pack']} | {b['modelLoadMs']:.1f} | {b['firstInferenceMs']:.1f} | {min(b['warmInferenceMs']):.1f}–{max(b['warmInferenceMs']):.1f} | {b['peakRssBytes']/1048576:.1f} | {b['strictCharacterEdits']} |")
@@ -50,7 +52,7 @@ report=f'''# Mac ARM P0 实测结果
 
 ## 结论
 
-本轮要求的 **C++20/Qt6工程骨架、当前Mac截图、图片贴图、本地OCR部署/切换风险验证** 已完成并留存证据；**不表示完整P0或跨平台产品全部完成**。Windows/Linux原生后端、其他显示器/权限场景、完整OCR质量、富文本、长截图/录屏和hx470活体接入仍待验证。
+**工程骨架、本地OCR、图片贴图和开发进程上下文的原生截图已实现并验证。独立启动截图状态：{independent["capture"]["status"]}。** 若为blocked，需要用户为CrossShot授予屏幕录制权限后复测；不能把开发宿主已有权限推广到独立App。**完整P0尚未完成**。Windows/Linux原生后端、其他显示器/权限场景、完整OCR质量、富文本、长截图/录屏和hx470活体接入仍待验证。
 
 ## 环境
 
@@ -65,7 +67,8 @@ Qt/ORT使用仓库内隔离SDK，没有替换原有Qt5/Homebrew。模型包权�
 - 本次采集回调耗时约 **{mac['capture']['elapsedMs']:.1f}ms**（单次探针，不是p95）。没有将整个桌面落盘，只保留自有合成图区域。
 - Pin原生NSWindow level3，高于普通窗口；锁定拖动与缩放几何通过。
 - 透明度0.55：白色Pin覆盖黑色普通窗口，实际捕获RGB为140/140/140，验证了**真实合成与遮挡关系**，不是只读Qt属性。
-- 未测多Spaces/全屏、跨DPR移动、权限首次授权/撤销。当前进程已有屏幕捕获访问权。
+- 开发宿主上下文已有捕获访问权；额外通过LaunchServices正常启动探针，截图状态为 **{independent["capture"]["status"]}**，原因：`{independent["capture"].get("reason", "none")}`。系统权限申请已触发，但不代替用户授权。
+- 未测多Spaces/全屏、跨DPR移动、拒绝/撤销后的完整恢复。
 
 ## 本地OCR：真正的C++推理
 
@@ -87,7 +90,7 @@ Qt/ORT使用仓库内隔离SDK，没有替换原有Qt5/Homebrew。模型包权�
 - 8个worker CLI契约通过：参数缺失、非法repeat、无效图片、缺manifest、损坏模型、路径穿越及两模型正常识别。
 - GUI实测：两模型切换、子进程取消后恢复、换图后抑制旧任务结果。
 - macdeployqt打包Qt/ORT，ad-hoc签名verify通过；清空开发环境变量后，包内GUI和worker均运行成功。
-- dyld实际加载记录中没有`.deps`库路径；并非只在开发树运行成功。包内原生截图/Pin探针也通过。
+- dyld实际加载记录中没有`.deps`库路径；包内原生截图/Pin探针在开发宿主权限上下文通过。**clean env不等于独立TCC身份**；LaunchServices结果单独保存在evidence/launchservices-capture.json，不被上述成功覆盖。
 - 模型仍从仓库models/读取，未打包；未公证、未在另一台无SDK机器验证，不是可公开分发的独立安装包。
 
 ## 本轮发现并解决的风险
@@ -96,6 +99,7 @@ Qt/ORT使用仓库内隔离SDK，没有替换原有Qt5/Homebrew。模型包权�
 2. CGDisplayPixelsWide返回1280而非DPR2物理2560；改为显示模式pixelWidth/pixelHeight并增加DPR断言，防止低分辨率截图被算作通过。
 3. OCR worker初始化QGuiApplication导致部署包缺offscreen插件而崩溃；改为QCoreApplication，从根本上去除worker的窗口系统初始化依赖。
 4. CMake仅在主程序重链时复制helper导致包内旧worker残留；改为每次构建检查复制，并在打包时显式覆盖，重新验证GUI/worker。
+5. 正常LaunchServices启动与开发进程的TCC授权不同；已新增独立启动探针。`open`命令返回0也不代表子应用探针通过，必须读取JSON中的capture.status。独立App授权仍由用户决定。
 
 ## 后续
 
@@ -109,9 +113,11 @@ bash tools/build-macos.sh
 bash tools/run-probes-macos.sh
 bash tools/package-macos.sh
 bash tools/run-macos.sh
+# 在系统设置允许CrossShot后复测独立启动截图：
+bash tools/probe-installed-macos.sh
 ```
 
 识别/截图输出含用户内容时默认留在本地，不应提交。evidence目录仅保留合成输入和脱敏日志。公开分发前补齐Qt/模型许可证清单、模型分发策略、签名/公证与最低OS验证。
 '''
 (r/'docs/p0/results.md').write_text(report)
-print('Evidence frozen; current scoped probes passed. Full P0 remains incomplete.')
+print('Evidence frozen. Developer-context native probes passed; independent capture:',independent['capture']['status'])

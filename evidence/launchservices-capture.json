@@ -1,0 +1,32 @@
+{
+    "architecture": "arm64",
+    "capture": {
+        "reason": "screen_permission_required",
+        "status": "blocked"
+    },
+    "logicalScreen": [
+        0,
+        0,
+        1280,
+        720
+    ],
+    "os": "macOS Tahoe (26.6)",
+    "pin": {
+        "lockedDrag": true,
+        "native": {
+            "alpha": 0.55,
+            "floating": true,
+            "level": 3,
+            "native_window": true,
+            "visible": true
+        },
+        "qtOpacity": 0.5490196078431373,
+        "spacesVerified": false,
+        "visualOcclusionVerified": false,
+        "zoomGeometry": true
+    },
+    "qt": "6.12.0",
+    "screenDpr": 2,
+    "screenName": "Q27P10",
+    "screenPermission": false
+}
