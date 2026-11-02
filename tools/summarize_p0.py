@@ -48,7 +48,7 @@ rows=[]
 for b in bench: rows.append(f"| {b['pack']} | {b['modelLoadMs']:.1f} | {b['firstInferenceMs']:.1f} | {min(b['warmInferenceMs']):.1f}–{max(b['warmInferenceMs']):.1f} | {b['peakRssBytes']/1048576:.1f} | {b['strictCharacterEdits']} |")
 report=f'''# Mac ARM P0 实测结果
 
-日期：2026-11-02。仓库：`/Users/wayne/Documents/work/code/crossshot`。
+日期：2026-11-02。仓库：`/Users/wayne/Documents/work/code/cpp/crossshot`。
 
 ## 结论
 
@@ -108,7 +108,7 @@ Qt/ORT使用仓库内隔离SDK，没有替换原有Qt5/Homebrew。模型包权�
 ## 复现
 
 ```bash
-cd /Users/wayne/Documents/work/code/crossshot
+cd /Users/wayne/Documents/work/code/cpp/crossshot
 bash tools/build-macos.sh
 bash tools/run-probes-macos.sh
 bash tools/package-macos.sh

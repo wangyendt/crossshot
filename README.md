@@ -14,7 +14,7 @@
 ## 本机快速运行
 
 ```bash
-cd /Users/wayne/Documents/work/code/crossshot
+cd /Users/wayne/Documents/work/code/cpp/crossshot
 bash tools/run-macos.sh
 ```
 
