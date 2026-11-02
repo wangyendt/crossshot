@@ -1,0 +1,53 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "core-only",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build-core",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CROSSSHOT_BUILD_GUI": "OFF",
+        "BUILD_TESTING": "ON"
+      }
+    },
+    {
+      "name": "mac-arm",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_PREFIX_PATH": "${sourceDir}/.deps/qt/6.12.0/macos",
+        "ONNXRUNTIME_ROOT": "${sourceDir}/.deps/onnxruntime",
+        "CMAKE_OSX_ARCHITECTURES": "arm64",
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "14.4"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "core-only",
+      "configurePreset": "core-only"
+    },
+    {
+      "name": "mac-arm",
+      "configurePreset": "mac-arm"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "core-only",
+      "configurePreset": "core-only",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "mac-arm",
+      "configurePreset": "mac-arm",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ]
+}

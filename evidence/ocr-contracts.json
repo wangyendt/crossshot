@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "missing required arguments",
+      "passed": true
+    },
+    {
+      "name": "bad repeat",
+      "passed": true
+    },
+    {
+      "name": "invalid image",
+      "passed": true
+    },
+    {
+      "name": "missing model manifest",
+      "passed": true
+    },
+    {
+      "name": "reject tampered model",
+      "passed": true
+    },
+    {
+      "name": "reject manifest traversal",
+      "passed": true
+    },
+    {
+      "name": "ppocr-v4-mobile synthetic recognition",
+      "passed": true
+    },
+    {
+      "name": "ppocr-v5-mobile synthetic recognition",
+      "passed": true
+    }
+  ],
+  "testInput": "synthetic fixture only",
+  "liveNetworkRequired": false
+}

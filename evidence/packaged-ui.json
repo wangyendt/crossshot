@@ -1,0 +1,8 @@
+{
+    "cancelledWorkerRecovered": true,
+    "heartbeatTicks": 25,
+    "ppocr-v4-mobile": true,
+    "ppocr-v5-mobile": true,
+    "staleResultSuppressed": true,
+    "status": "passed"
+}

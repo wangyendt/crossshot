@@ -1,0 +1,50 @@
+{
+    "detectorMs": 56.050208,
+    "imageHeight": 420,
+    "imageWidth": 1200,
+    "inferenceMs": 131.961208,
+    "lines": [
+        {
+            "box": [
+                56,
+                66,
+                471,
+                39
+            ],
+            "score": 0.9963109890619913,
+            "text": "跨平台截图OCR风险验证"
+        },
+        {
+            "box": [
+                58,
+                166,
+                422,
+                39
+            ],
+            "score": 0.998823145031929,
+            "text": "CrossShot C++20 Qt 6"
+        },
+        {
+            "box": [
+                53,
+                265,
+                482,
+                48
+            ],
+            "score": 0.9913926223913828,
+            "text": "Invoice 12345.67 ABC xyz"
+        }
+    ],
+    "modelLoadMs": 181.383958,
+    "modelPack": "ppocr-v4-mobile",
+    "onnxRuntime": "1.23.2",
+    "provider": "paddle-onnx-cpu",
+    "runsMs": [
+        139.79775,
+        141.025625,
+        131.961208
+    ],
+    "status": "completed",
+    "text": "跨平台截图OCR风险验证\nCrossShot C++20 Qt 6\nInvoice 12345.67 ABC xyz",
+    "warning": "P0 axis-aligned DB components; no rotated/perspective text, no full reference parity claimed"
+}

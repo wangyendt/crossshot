@@ -1,0 +1,9 @@
+.deps/
+build*/
+models/
+artifacts/
+.DS_Store
+*.user
+__pycache__/
+.env
+aqtinstall.log

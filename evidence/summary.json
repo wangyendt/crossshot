@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-02",
+  "scope": "Mac ARM current-display P0 slice, NOT full P0 completion",
+  "cpu": "Apple M1 Max",
+  "host": {
+    "architecture": "arm64",
+    "capture": {
+      "cornerAnchors": true,
+      "cropPhysical": [
+        1200,
+        420
+      ],
+      "elapsedMs": 214.520833,
+      "fullDesktopPersisted": false,
+      "matchesQtDevicePixelRatio": true,
+      "nativeBackend": "ScreenCaptureKit/SCScreenshotManager",
+      "physicalFrame": [
+        2560,
+        1440
+      ],
+      "pixelScale": 2,
+      "status": "passed"
+    },
+    "logicalScreen": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "os": "macOS Tahoe (26.6)",
+    "pin": {
+      "compositedRgb": [
+        140,
+        140,
+        140
+      ],
+      "lockedDrag": true,
+      "native": {
+        "alpha": 0.55,
+        "floating": true,
+        "level": 3,
+        "native_window": true,
+        "visible": true
+      },
+      "qtOpacity": 0.5490196078431373,
+      "spacesVerified": false,
+      "visualOcclusionVerified": true,
+      "zoomGeometry": true
+    },
+    "qt": "6.12.0",
+    "screenDpr": 2,
+    "screenName": "Q27P10",
+    "screenPermission": true
+  },
+  "localOcr": [
+    {
+      "pack": "ppocr-v4-mobile",
+      "modelLoadMs": 181.383958,
+      "firstInferenceMs": 139.79775,
+      "warmInferenceMs": [
+        141.025625,
+        131.961208
+      ],
+      "peakRssBytes": 189612032,
+      "strictCharacterEdits": 2,
+      "truthCharactersIncludingWhitespace": 60,
+      "exactText": false
+    },
+    {
+      "pack": "ppocr-v5-mobile",
+      "modelLoadMs": 227.645875,
+      "firstInferenceMs": 166.059875,
+      "warmInferenceMs": [
+        190.83,
+        155.161959
+      ],
+      "peakRssBytes": 211222528,
+      "strictCharacterEdits": 0,
+      "truthCharactersIncludingWhitespace": 60,
+      "exactText": true
+    }
+  ],
+  "fixtureGroundTruth": "跨平台截图 OCR 风险验证\nCrossShot C++20 Qt 6\nInvoice 12345.67 ABC xyz",
+  "coreAssertions": 14,
+  "widgetBehaviorCases": 4,
+  "ctestSuitesPassed": 2,
+  "ocrCliCasesPassed": 8,
+  "gui": {
+    "cancelledWorkerRecovered": true,
+    "heartbeatTicks": 22,
+    "ppocr-v4-mobile": true,
+    "ppocr-v5-mobile": true,
+    "staleResultSuppressed": true,
+    "status": "passed"
+  },
+  "packaging": {
+    "adHocSignatureVerified": true,
+    "cleanEnvironmentGuiAndWorkerPassed": true,
+    "loadedSdkPaths": false,
+    "modelFilesBundled": false,
+    "notarized": false,
+    "testedOnAnotherMachine": false
+  },
+  "windowsRuntimeTested": false,
+  "linuxRuntimeTested": false,
+  "remoteOcrCalled": false,
+  "fullDesktopSaved": false,
+  "sourceSha256": {
+    "apps/desktop/fixture.cpp": "c6ba8fada94f595c9f5d69fc050846bba37796ae01d7bd9ab9899371984aa8cf",
+    "apps/desktop/fixture.hpp": "ba83432fc512a450b303a2195f251ff211cef290433a732a8e865ca952e6c3be",
+    "apps/desktop/main.cpp": "7782977b53df6f56fd868ac2876311c972b5ca491d6c4c714070d85b8733a6da",
+    "apps/desktop/pin.cpp": "ca9aff0dd70266abab9142529fc711c692934f7d7fbbb337720a81893a010974",
+    "apps/desktop/pin.hpp": "6692389a79e465dfc3b0aa0e6d996ff9fd0677f66a2bb7da080867e4d65b97f8",
+    "libs/core/core.cpp": "0620cc3c84a228879e6f5f6ae29ba4dbab7374fde176b57567a1dde6fecac963",
+    "libs/core/core.hpp": "abb9d5b0e67c3f8513586c7075c8b15b28a6affbb266a5542fa6d1d04da4a123",
+    "platform/capture.hpp": "e94fc9507cfaf4f42ccb281fe2cc581c08abec6506e48067deaf3f789424b6f3",
+    "platform/macos/capture.mm": "9fa5c5f42c6a630f304b6c4f7b51e261cd48f816c96efffeaf95066eb58d11a5",
+    "platform/stub.cpp": "ac9371ea266b3a0da6001fedc7fb28fd9bc520ee16cb4e563512568ab97f8d89",
+    "providers/paddle/main.cpp": "50acac003501cb28bf3f243a2509f1b22eb15962798d3c2e21454fe10de82a6f",
+    "providers/paddle/ocr.cpp": "56c9e70f490dcc9b2fb9b57834f4c3272401cb8ba33fc547bf5c094b25373c59",
+    "providers/paddle/ocr.hpp": "3d5d1b3ed0b30d8adf2119ec7135a784e0ec5ad0cef9f0cd9a02c9fe64773828",
+    "tests/core_tests.cpp": "38f29bc7e14addefffa349530069be195881184a5fee5654ae59962bf55ea5a5",
+    "tests/ocr_contracts.py": "1cb7479144c61574961417187875d34e2073cb65aead87235e5a5a17b3060bf3",
+    "tests/widget_tests.cpp": "749c65007020713938e17c2729c32e0433bbc316ec8d050e94e147d9a2d7969b"
+  }
+}

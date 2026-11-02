@@ -1,0 +1,14 @@
+Internal ctest changing into directory: <REPO>/build-core
+Test project <REPO>/build-core
+    Start 1: core_contracts
+1/1 Test #1: core_contracts ...................***Failed    0.41 sec
+FAIL after 1 checks: Retina maps logical region to physical pixels
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.41 sec
+
+The following tests FAILED:
+	  1 - core_contracts (Failed)
+Errors while running CTest

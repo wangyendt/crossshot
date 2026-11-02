@@ -1,0 +1,50 @@
+{
+    "architecture": "arm64",
+    "capture": {
+        "cornerAnchors": true,
+        "cropPhysical": [
+            1200,
+            420
+        ],
+        "elapsedMs": 214.520833,
+        "fullDesktopPersisted": false,
+        "matchesQtDevicePixelRatio": true,
+        "nativeBackend": "ScreenCaptureKit/SCScreenshotManager",
+        "physicalFrame": [
+            2560,
+            1440
+        ],
+        "pixelScale": 2,
+        "status": "passed"
+    },
+    "logicalScreen": [
+        0,
+        0,
+        1280,
+        720
+    ],
+    "os": "macOS Tahoe (26.6)",
+    "pin": {
+        "compositedRgb": [
+            140,
+            140,
+            140
+        ],
+        "lockedDrag": true,
+        "native": {
+            "alpha": 0.55,
+            "floating": true,
+            "level": 3,
+            "native_window": true,
+            "visible": true
+        },
+        "qtOpacity": 0.5490196078431373,
+        "spacesVerified": false,
+        "visualOcclusionVerified": true,
+        "zoomGeometry": true
+    },
+    "qt": "6.12.0",
+    "screenDpr": 2,
+    "screenName": "Q27P10",
+    "screenPermission": true
+}

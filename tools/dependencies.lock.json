@@ -1,0 +1,12 @@
+{
+  "qt": "6.12.0",
+  "qtArchive": "qtbase",
+  "qtHostArch": "mac desktop clang_64 (universal SDK; application built arm64)",
+  "aqtinstall": "3.3.0",
+  "onnxruntime": "1.23.2",
+  "onnxruntimeArchiveSha256": "b4d513ab2b26f088c66891dbbc1408166708773d7cc4163de7bdca0e9bbb7856",
+  "modelsLock": "tools/models.lock.json",
+  "cppStandard": 20,
+  "macDeploymentTarget": "14.4",
+  "publicRedistributionAudited": false
+}
